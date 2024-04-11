@@ -1,0 +1,15 @@
+name: 'Upload Tracking Plan to Segment GitHub Action'
+description: 'A GitHub Action that uploads multiple tracking plans to Segment'
+author: 'Leonel Sanches'
+inputs:
+  files_content:
+    description: 'The modified files.'
+    required: true
+outputs:
+  results:
+    description: 'The file upload results.'
+    # need to specify the extra `value` field for `composite` actions
+    value: ${{ steps.upload-tracking-plan-to-segment.outputs.results }}
+runs:
+  using: node20
+  main: dist/index.js
