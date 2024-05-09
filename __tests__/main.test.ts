@@ -28,10 +28,20 @@ describe("Action", () => {
 
     it("Trivial - Success case", async () => {
         // Set the action's inputs as return values from core.getInput()
+        process.env.SEGMENT_API_KEY = "test";
         getInputMock.mockImplementation((name) => {
             switch (name) {
                 case "files_content":
-                    return "=========================== tp_2eI1Qp3KVbQxyJmlS2GGX4xkdQd.my-first-tracking-plan.json ==========================";
+                    return [
+                        "=========================== tp_2eI1Qp3KVbQxyJmlS2GGX4xkdQd.my-first-tracking-plan.json ==========================",
+                        `{`,
+                        `  "properties": {`,
+                        `    "context": {},`,
+                        `    "traits": {},`,
+                        `    "properties": {}`,
+                        `  }`,
+                        `}`
+                    ].join("\n");
                 default:
                     return "";
             }
